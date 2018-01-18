@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="vods.css">
+        <script src="jquery.js"></script>
+        <script type="text/javascript" src="vods.js"></script>
+        <script>
+            $(function(){
+                $("#includedContent").load("vods.html", function() {
+                    p();
+                });
+            });
+        </script>
+        <title>twitch-view-following-vods-list</title>
+    </head>
+
+    <body>
+        <div id="includedContent"></div>
+    </body>
+</html>
