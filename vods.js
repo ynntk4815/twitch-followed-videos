@@ -8,10 +8,15 @@ var videos = null;
 var queryLimit = false;
 
 function p() {
-    $('#query').click(() => {
-        p2();
-    });
     $('.loader').hide();
+    var id = getUrlParameter('login_id');
+    if (id) {
+        p2(id);
+    }
+    $('#query').click(() => {
+        var id = $('#login_id').val();
+        p2(id);
+    });
     window.onscroll = (e) => {
         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 200) {
             loadMore();
@@ -19,10 +24,10 @@ function p() {
     };
 }
 
-function p2() {
+function p2(id) {
     $('#input_body').hide();
     $('.loader').show();
-    var user = getUser($('#login_id').val());
+    var user = getUser(id);
     if (user == null) {
         $('.progress').append("guery user not success.");
         $('.loader').hide();
@@ -185,4 +190,19 @@ function runTwitch(query) {
     //$('.progress').append("<br>");
     return result;
 }
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
 //alert(JSON.stringify(charObj));
