@@ -4,6 +4,7 @@ var trHeaders = {
 };
 
 var base_url = 'https://api.twitch.tv/helix/';
+var twitch_url = 'https://www.twitch.tv/';
 var videos = null;
 var queryLimit = false;
 
@@ -90,7 +91,8 @@ function loadMore() {
     if (videos.length == 0) return;
     videos[0].forEach(v => {
         var video = $('<div>').attr("class", "video");
-        var profile = $('<img>').attr("src", v.user.profile_image_url).attr("class", "profile");
+        var profile_img = $('<img>').attr("src", v.user.profile_image_url).attr("class", "profile");
+        var profile = $('<a>').attr("href", twitch_url + v.user.login).append(profile_img);
         var title = $('<span>').attr("class", "title").html(v.title);
         var display_name = $('<span>').attr("class", "display_name").html(v.user.display_name);
         var duration = $('<span>').attr("class", "duration").html(v.duration);
